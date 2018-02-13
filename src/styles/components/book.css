@@ -4,7 +4,6 @@
 }
 .hs-booksList{
     display:flex;
-    justify-content: space-between;
     flex-flow: row wrap;
 }
 
@@ -37,13 +36,38 @@
     .cover{
         text-align:right;
         max-width:128px;
+        min-height:240px;
         
         img {
             border-radius:3px;
             border:1px solid #ccc;
             max-width:100%;
             overflow:hidden;
+            max-height:200px;
         }
+
+        a.linkable{
+            display:inline-block;
+            cursor:pointer;
+            position:relative;
+            z-index:1;
+            &:before{
+                content:'';
+                background:rgba(#000,0.1);
+                left:0;
+                right:0;
+                bottom:0;
+                top:0;
+                display:block;
+                z-index:2;
+                opacity:0;
+            }
+
+            &:hover{
+                opacity:1;
+            }
+        }
+
     }
 
     h1{

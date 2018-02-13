@@ -1,4 +1,20 @@
 .hs-sidebar{
     background:#292b2c;
     color:#aaa;
+    padding:25px 10px;
+
+    .search-field {
+        width:100%;
+
+        input{
+            background:rgba(#000,0);
+            border:1px solid #aaa;
+            border-radius:3px;
+            display:flex;
+            width:100%;
+            padding:5px;
+            color:#fff;
+            box-sizing: border-box;
+        }
+    }
 }

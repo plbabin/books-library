@@ -7,9 +7,26 @@ import Book from 'components/Book';
 @observer
 class BooksList extends Component {
     render() {
-        const itemList = Array.from(Array(20).keys()).map( () => {
-            return (<Book />);
-        })
+        if(!this.props.itemList || this.props.itemList.length === 0){
+            return null;
+        }
+        const itemList = this.props.itemList.map( (item) => {
+            let author = '';
+            if(item.authors && item.authors.length > 0){
+                author = item.authors[0];
+            }
+
+            return (<Book 
+                        key={item.id}
+                        id={item.id} 
+                        title={item.title}
+                        author={author}
+                        image={item.thumbnail}
+                        addedToList={false}
+                        linkable={this.props.linkable}
+                        />
+            );
+        });
         return (
             <div className="hs-booksList">
                 {itemList}

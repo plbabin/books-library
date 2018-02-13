@@ -1,20 +1,46 @@
 import React, { Component } from 'react';
 
-import {observer} from 'mobx-react';
+import {observer, inject} from 'mobx-react';
+import { withRouter } from 'react-router-dom';
 
+@inject('books')
+@withRouter
 @observer
 class Book extends Component {
+    
+    handleClick = (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        if(this.props.addedToList){
+            this.props.books.removeItem(this.props.id);
+        }else{
+            this.props.books.addItem(this.props.id);
+        }
+    }
+
+    handleCoverClick = (e) => {
+        e.preventDefault();
+        if(!this.props.linkable){
+            return false;
+        }
+        this.prosp.history.push(`/details/${this.props.id}`);
+    }
+
     render() {
-    return (
-        <div className="hs-book">
-            <div className="cover">
-                <button className="btn btn-remove">remove</button>
-                <img src="https://books.google.com/books/content?id=K5zOroHn_LYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt=""/>
+        const buttonLabel = this.props.addedToList ? 'remove' : 'add';
+        const linkableClass = this.props.linkable ? 'linkable' : '';
+        return (
+            <div className="hs-book">
+                <div className="cover">
+                    <button className="btn" onClick={this.handleClick}>{buttonLabel}</button>
+                    <a onClick={this.handleCoverClick} className={linkableClass}>
+                        <img src={this.props.image} alt=""/>
+                    </a>
+                </div>
+                <h1>{this.props.title}</h1>
+                <h2>{this.props.author}</h2>
             </div>
-            <h1>The Ivory Tower and Harry Potter</h1>
-            <h2>Lana A. Whited</h2>
-        </div>
-    );
+        );
     }
 }
 

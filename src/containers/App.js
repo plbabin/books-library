@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import {autorun} from 'mobx';
 import {observer, inject} from 'mobx-react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 
@@ -8,7 +9,19 @@ import BookDetails from 'containers/BookDetails';
 import BookSearchResults from 'containers/BookSearchResults';
 import BookSaved from 'containers/BookSaved';
 
+@inject('books')
+@observer
+@withRouter
 class App extends Component {
+
+  componentWillMount(){
+    this.searchHandler = autorun(() => {
+        if(this.props.books.searchTerm.length > 0){
+          this.props.history.replace(`/search/${this.props.books.searchTerm}`)
+        }
+    });
+  }
+
   render() {
     return (
       <div className="app">
