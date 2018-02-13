@@ -9,8 +9,9 @@ import {Provider} from "mobx-react";
 
 import stores from './stores';
 
-import App from './App';
-import './index.css';
+import App from 'containers/app';
+
+import 'styles/index.css';
 
 useStrict(true);
 
