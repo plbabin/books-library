@@ -20,7 +20,7 @@ class Books {
     }
 
     @action async search(term){
-        if(term === ''){
+        if(!term){
             this.clearSearch();
             return;
         }
@@ -32,13 +32,13 @@ class Books {
         runInAction( () => {
             this.searchResults = items;
             this.isLoading = false;
-        })
-
+        });
     }
 
     @action clearSearch(){
         this.searchResults = [];
         this.isLoading = false;
+        this.searchTerm = '';
     }
 
     @action addItem(itemId){

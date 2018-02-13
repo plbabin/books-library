@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { Router } from 'react-router-dom'
-import createHistory from 'history/createBrowserHistory'
+import { BrowserRouter as Router } from 'react-router-dom'
+// import createHistory from 'history/createBrowserHistory'
 
 import {useStrict} from 'mobx';
 import {Provider} from "mobx-react";
@@ -15,11 +15,9 @@ import 'styles/app.css';
 
 useStrict(true);
 
-const history = createHistory();
-
 ReactDOM.render( 
     <Provider {...stores}>
-        <Router history={history}>
+        <Router>
             <App />
         </Router>
     </Provider>, document.getElementById('root'));

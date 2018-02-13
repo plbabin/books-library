@@ -14,25 +14,17 @@ import BookSaved from 'containers/BookSaved';
 @withRouter
 class App extends Component {
 
-  componentWillMount(){
-    this.searchHandler = autorun(() => {
-        if(this.props.books.searchTerm.length > 0){
-          this.props.history.replace(`/search/${this.props.books.searchTerm}`)
-        }
-    });
-  }
-
   render() {
     return (
       <div className="app">
         <Sidebar />
         <main className="hs-page">
           <div className="hs-container">
-            <Switch>
+
               <Route exact path='/' component={BookSaved}/>
-              <Route exact path='/search/:term' component={BookSearchResults}/>
+              <Route path='/search/:term?' component={BookSearchResults}/>
               <Route path='/details/:id' component={BookDetails}/>
-            </Switch>
+
           </div>  
         </main>
       </div>

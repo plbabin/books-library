@@ -7,14 +7,30 @@
         width:100%;
 
         input{
-            background:rgba(#000,0);
-            border:1px solid #aaa;
+            background:rgba(#000,0.2);
+            border:1px solid #444;
             border-radius:3px;
             display:flex;
             width:100%;
             padding:5px;
-            color:#fff;
+            color:#f7f7f7;
             box-sizing: border-box;
         }
+    }
+
+    a{
+        font-size:13px;
+        cursor:pointer;
+        color:#ddd;
+        transition:0.15 ease-in color;
+        &:hover{
+            color:#fff;
+        }
+    }
+
+    .hs-sidebar__section{
+        margin:20px 0 0;
+        padding:20px 0 0;
+        border-top:1px solid rgba(#fff,0.1);
     }
 }
