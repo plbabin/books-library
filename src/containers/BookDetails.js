@@ -3,14 +3,14 @@ import React, { Component } from 'react';
 import {observer} from 'mobx-react';
 
 @observer
-class Sidebar extends Component {
+class BookList extends Component {
   render() {
     return (
-        <div className="hs-sidebar">
-            sidebar
+        <div className="hs-bookDetails">
+            <h1>Book details</h1>
         </div>
     );
   }
 }
 
-export default Sidebar;
+export default BookList;

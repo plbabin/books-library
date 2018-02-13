@@ -6,10 +6,15 @@
     width:100%;
     min-height:100%;
 }
-.hs-page-container{
+.hs-page{
     padding-left:var(--sidebar-width);
     width:100%;
 }
+
+.hs-container{
+    padding:25px;
+}
+
 .hs-sidebar{
     width:var(--sidebar-width);
     position:fixed;
