@@ -9,10 +9,12 @@
 .hs-page{
     padding-left:var(--sidebar-width);
     width:100%;
+    min-height: 100vh;
 }
 
 .hs-container{
     padding:25px;
+    height:100%;
 }
 
 .hs-sidebar{

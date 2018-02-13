@@ -4,6 +4,9 @@ import {observer, inject} from 'mobx-react';
 
 import { withRouter } from 'react-router-dom';
 
+import LongArrowLeft from 'react-icons/lib/fa/long-arrow-left';
+
+
 import BooksList from 'components/BooksList'
 
 @inject('books')
@@ -51,11 +54,18 @@ class BookSaved extends Component {
     return subheading;
   }
 
+  renderEmptyList(){
+    if(this.props.books.userItems.length === 0){
+      return (<h2><LongArrowLeft />Search a title to add book to your collection</h2>)
+    }
+    return null;
+  }
+
   render() {
     return (
         <div className="hs-bookSaved">
             <h1>My Books {this.renderSubHeading()}</h1>
-
+            {this.renderEmptyList()}
             <BooksList 
               itemList={this.props.books.activeItems} 
               linkable={true} 

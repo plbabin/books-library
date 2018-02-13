@@ -4,6 +4,8 @@ import {observer, inject} from 'mobx-react';
 
 import { withRouter } from 'react-router-dom';
 
+import Spinner from "react-svg-spinner";
+
 import BooksList from 'components/BooksList';
 
 @inject("books")
@@ -33,11 +35,11 @@ class BookSearchResults extends Component {
       searchTermResults = (<em>{this.props.books.searchTerm} ({this.props.books.searchResults.length})</em>);
     }
     return (
-        <div className="hs-booklist">
+        <div className="hs-booksList">
             <h1>Search Results {searchTermResults}</h1>
 
             {this.props.books.isLoading && 
-              <p>Is loading</p>
+              <div className="spinner"><Spinner size="80px"/></div>
             }
 
             {!this.props.books.isLoading && 

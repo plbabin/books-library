@@ -86,7 +86,7 @@ class Sidebar extends Component {
         <div className="hs-sidebar">
             <div className="search-field">
               <span className="icon"><Search /></span>
-              <input type="text" onChange={this.onChange} value={this.state.inputValue} placeholder="Search book to add" />
+              <input type="text" onChange={this.onChange} value={this.state.inputValue} placeholder="Search by title..." />
               {this.state.inputValue.length > 0 && <span className="icon"><TimesCircle onClick={ this.clearSearch } /></span>}
             </div>
 

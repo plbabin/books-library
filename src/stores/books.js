@@ -6,7 +6,7 @@ const STORAGE_KEY = 'books';
 
 class Books {
     @observable searchTerm = '';
-	@observable isLoading = false;
+	@observable isLoading = true;
     @observable userItems = [];
     @observable ids = [];
     @observable searchResults = [];
@@ -76,7 +76,6 @@ class Books {
     }
 
     @computed get activeItems(){
-        console.log('computed active items')
         let items = toJS(this.userItems);
         if(this.currentCategory){
             items = items.filter( (i) => {
@@ -86,8 +85,10 @@ class Books {
                 }
                 return itemCategory === this.currentCategory;
             });
-            console.log(items);
         }
+
+        // apply sort here
+
         return items;
     }
     
