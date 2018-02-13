@@ -6,28 +6,31 @@ import Book from 'components/Book';
 
 @observer
 class BooksList extends Component {
+    generateItemProps(item){
+        let author = '';
+        if(item.authors && item.authors.length > 0){
+            author = item.authors[0];
+        }
+
+        const {itemList,...propsFromParent} = this.props;
+
+        return {
+            id:item.id,
+            title:item.title,
+            author:author,
+            image:item.thumbnail,
+            saved:item.saved,
+            ...propsFromParent
+        };
+    }
+
     render() {
         if(!this.props.itemList || this.props.itemList.length === 0){
             return null;
         }
         const itemList = this.props.itemList.map( (item) => {
-            let author = '';
-            if(item.authors && item.authors.length > 0){
-                author = item.authors[0];
-            }
-
-            return (<Book 
-                        key={item.id}
-                        id={item.id} 
-                        title={item.title}
-                        author={author}
-                        image={item.thumbnail}
-                        saved={item.saved}
-                        linkable={this.props.linkable}
-                        onAddItem={this.props.onAddItem}
-                        onRemoveItem={this.props.onRemoveItem}
-                        />
-            );
+            const props = this.generateItemProps(item);
+            return (<Book key={item.id} {...props} />);
         });
         return (
             <div className="hs-booksList">

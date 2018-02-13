@@ -38,6 +38,14 @@ class Books {
         return data
     }
 
+    findById(itemId){
+        const items = this.userItems.find( (i) => i.id === itemId);
+        if(items){
+            return items;
+        }
+        return null;
+    }
+
     load(){
         const items = JSON.parse(localStorage.getItem(STORAGE_KEY));
         if(items){
@@ -48,18 +56,19 @@ class Books {
     }
 
     @computed get categories(){
-        const categories = [];
+        const categories = {};
         this.userItems.forEach( (i) => {
             let itemCategory = UNCATEGORIZED;
             if(i.categories && i.categories.length > 0){
                 itemCategory = i.categories[0];
             }
             
-            if(!categories.includes(itemCategory)){
-                categories.push(itemCategory);
+            if(!Object.keys(categories).includes(itemCategory)){
+                categories[itemCategory] = 0;
             }
+            categories[itemCategory]++;
         });
-        return categories.sort();
+        return categories;
     }
 
     @computed get userItemIds(){

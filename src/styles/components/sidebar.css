@@ -47,14 +47,48 @@
         cursor:pointer;
         color:#ddd;
         transition:0.15 ease-in color;
-        &:hover{
+        text-decoration: none;
+        display:inline-flex;
+        flex-direction:row;
+        flex: 1 1 100%;
+        &:hover, &.active{
             color:#fff;
+
+            .pill{
+                background:rgba(#000, 0.5);
+            }
         }
+    }
+
+    .pill{
+        margin-left:auto;
+        display:inline-flex;
+        flex:0 0 30px;
+        height:18px;
+        background:rgba(#000, 0.3);
+        color:#eee;
+        font-style:normal;
+        justify-content: center;
+        align-items: center;
+        border-radius:18px;
     }
 
     .hs-sidebar__section{
         margin:20px 0 0;
         padding:20px 0 0;
         border-top:1px solid rgba(#fff,0.1);
+
+        li{
+            display:flex;
+
+            &:not(:last-child){
+                padding-bottom:16px;
+            }
+        }
+
+        svg{
+            display:inline-flex;
+            flex:0 0 20px;
+        }
     }
 }

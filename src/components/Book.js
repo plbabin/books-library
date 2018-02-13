@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 
-import {observer, inject} from 'mobx-react';
-import { withRouter } from 'react-router-dom';
+import {observer} from 'mobx-react';
 
 import Plus from 'react-icons/lib/fa/plus';
 import Minus from 'react-icons/lib/fa/minus';
+import Search from 'react-icons/lib/fa/search';
 
-@inject('books')
-@withRouter
 @observer
 class Book extends Component {
     
@@ -26,7 +24,7 @@ class Book extends Component {
         if(!this.props.linkable){
             return false;
         }
-        this.prosp.history.push(`/details/${this.props.id}`);
+        this.props.onCoverClick(this.props.id);
     }
 
     renderActionButton(){
@@ -51,6 +49,7 @@ class Book extends Component {
                     
                     <a onClick={this.handleCoverClick} className={linkableClass}>
                         <img src={this.props.image} alt=""/>
+                        {this.props.linkable && <span className="cover-hover">{<Search size={40} />}</span>}
                     </a>
                 </div>
                 <h1>{this.props.title}</h1>

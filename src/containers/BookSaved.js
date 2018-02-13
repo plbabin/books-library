@@ -15,6 +15,10 @@ class BookSaved extends Component {
     this.props.books.removeItem(itemId);
   }
 
+  onCoverClick = (itemId) => {
+    this.props.history.push(`/details/${itemId}`);
+  }
+
   renderSubHeading(){
     let subheadingText = '';
     let subheading = null;
@@ -40,6 +44,7 @@ class BookSaved extends Component {
             <BooksList 
               itemList={this.props.books.activeItems} 
               linkable={true} 
+              onCoverClick={this.onCoverClick}
               onRemoveItem={this.onRemoveItem} />
         </div>
     );

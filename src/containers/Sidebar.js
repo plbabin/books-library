@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import {observable, when} from 'mobx';
 import {observer, inject} from 'mobx-react';
 
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter, Link, NavLink } from 'react-router-dom';
 
 import Book from 'react-icons/lib/fa/book';
 import Bookmark from 'react-icons/lib/fa/bookmark';
@@ -59,10 +59,17 @@ class Sidebar extends Component {
     if(this.props.books.categories.length === 0){
       return null;
     }
-    const categories = this.props.books.categories.map( (cat) => {
+    const categories = Object.keys(this.props.books.categories).map( (cat) => {
       return (
         <li key={cat}>
-          <Bookmark /> <Link to={`/category/${cat}`} onClick={this.handleSidebarLinkClick}>{cat}</Link>
+          <NavLink 
+            to={`/category/${cat}`} 
+            onClick={this.handleSidebarLinkClick}
+            activeClassName="active">
+              <Bookmark />
+              {cat}
+              <em className="pill">{this.props.books.categories[cat]}</em>
+            </NavLink>
         </li>
       );
     });
@@ -85,7 +92,7 @@ class Sidebar extends Component {
 
             <ul className="hs-sidebar__section">
               <li>
-                <Book /> <Link to="/" onClick={this.handleSidebarLinkClick}>My Books ({this.props.books.userItems.length})</Link>
+                <NavLink to="/" onClick={this.handleSidebarLinkClick} activeClassName="active"><Book /> My Books <em className="pill">{this.props.books.userItems.length}</em></NavLink>
               </li>
             </ul>
             {this.renderCategories()}
