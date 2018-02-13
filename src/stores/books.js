@@ -1,6 +1,8 @@
-import {observable, action, runInAction, computed} from "mobx";
+import {observable, action, runInAction, computed, autorun, toJS} from "mobx";
 
 const UNCATEGORIZED = 'Uncategorized';
+const STORAGE_KEY = 'books';
+
 
 class Books {
     @observable searchTerm = '';
@@ -9,6 +11,20 @@ class Books {
     @observable ids = [];
     @observable searchResults = [];
     @observable currentCategory;
+
+    constructor(){
+        this.load();
+        let firstRun = true;
+        autorun(() => {
+        // This code will run every time any observable property
+        // on the store is updated.
+            const json = JSON.stringify(toJS(this.userItems));
+            if (!firstRun) {
+                localStorage.setItem(STORAGE_KEY, json);
+            }
+            firstRun = false;
+        });
+    }
 
     async getRequest(url){
         let data = await (await (fetch(url)
@@ -20,6 +36,15 @@ class Books {
             })
         ))
         return data
+    }
+
+    load(){
+        const items = JSON.parse(localStorage.getItem(STORAGE_KEY));
+        if(items){
+            runInAction( () => {
+                this.userItems = items;
+            });
+        }
     }
 
     @computed get categories(){

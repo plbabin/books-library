@@ -23,7 +23,7 @@ class BookSaved extends Component {
       subheadingText = this.props.match.params.category;
     }
     if(this.props.books.activeItems.length > 0){
-      subheadingText = `${subheadingText} (${this.props.books.activeItems.length}`;
+      subheadingText = `${subheadingText} (${this.props.books.activeItems.length})`;
     }
     if(subheadingText){
       subheading = (<em>{subheadingText}</em>);

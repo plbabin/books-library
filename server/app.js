@@ -30,9 +30,9 @@ const router = express.Router();              // get an instance of the express 
 
 const searchOptions = {
   // key: "YOUR API KEY",
-  field: 'title',
+  // field:'title',
   offset: 0,
-  limit: 10,
+  limit: 25,
   type: 'books',
   order: 'relevance',
   lang: 'en'
@@ -41,8 +41,9 @@ const searchOptions = {
 router.route('/books')
   .get( (req, res) => {
     res.setHeader('Content-Type', 'application/json');
-    
-    books.search(req.query.q, searchOptions, (error, results) => {
+    const term = req.query.q.replace(/\s/g, "+");
+    const searchString = `intitle:"${term}"`;
+    books.search(searchString, searchOptions, (error, results) => {
       if ( ! error ) {
         res.json(results);
       }else{

@@ -5,6 +5,12 @@ import {observer, inject} from 'mobx-react';
 
 import { withRouter, Link } from 'react-router-dom';
 
+import Book from 'react-icons/lib/fa/book';
+import Bookmark from 'react-icons/lib/fa/bookmark';
+import Search from 'react-icons/lib/fa/search';
+import TimesCircle from 'react-icons/lib/fa/times-circle';
+
+
 import {debounce} from 'throttle-debounce';
 
 @inject('books')
@@ -35,13 +41,18 @@ class Sidebar extends Component {
   }
 
   doSearch = (searchTerm) => {
-    this.props.history.push(`/search/${searchTerm}`)
+    this.props.history.replace(`/search/${searchTerm}`)
     this.props.books.search(searchTerm);
   }
 
   onChange = (e) => {
     this.doSearch(e.target.value);
     this.setState({inputValue: e.target.value})
+  }
+
+  clearSearch = () => { 
+    this.setState({inputValue: ''}); 
+    this.props.history.push(`/`)
   }
 
   renderCategories(){
@@ -51,7 +62,7 @@ class Sidebar extends Component {
     const categories = this.props.books.categories.map( (cat) => {
       return (
         <li key={cat}>
-          <Link to={`/category/${cat}`} onClick={this.handleSidebarLinkClick}>{cat}</Link>
+          <Bookmark /> <Link to={`/category/${cat}`} onClick={this.handleSidebarLinkClick}>{cat}</Link>
         </li>
       );
     });
@@ -67,12 +78,14 @@ class Sidebar extends Component {
     return (
         <div className="hs-sidebar">
             <div className="search-field">
+              <span className="icon"><Search /></span>
               <input type="text" onChange={this.onChange} value={this.state.inputValue} placeholder="Search book to add" />
+              {this.state.inputValue.length > 0 && <span className="icon"><TimesCircle onClick={ this.clearSearch } /></span>}
             </div>
 
             <ul className="hs-sidebar__section">
               <li>
-                <Link to="/" onClick={this.handleSidebarLinkClick}>My Books</Link>
+                <Book /> <Link to="/" onClick={this.handleSidebarLinkClick}>My Books ({this.props.books.userItems.length})</Link>
               </li>
             </ul>
             {this.renderCategories()}
