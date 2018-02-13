@@ -76,8 +76,21 @@ class Books {
     }
 
     @computed get activeItems(){
-        return this.userItems;
+        console.log('computed active items')
+        let items = toJS(this.userItems);
+        if(this.currentCategory){
+            items = items.filter( (i) => {
+                let itemCategory = UNCATEGORIZED;
+                if(i.categories && i.categories.length > 0){
+                    itemCategory = i.categories[0];
+                }
+                return itemCategory === this.currentCategory;
+            });
+            console.log(items);
+        }
+        return items;
     }
+    
 
     @action async search(term){
         if(!term){
@@ -122,6 +135,10 @@ class Books {
         }
 
         this.userItems.remove(item);
+    }
+
+    @action setCurrentCategory(category){
+        this.currentCategory = category;
     }
 
 

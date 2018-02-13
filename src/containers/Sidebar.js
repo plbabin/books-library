@@ -92,7 +92,12 @@ class Sidebar extends Component {
 
             <ul className="hs-sidebar__section">
               <li>
-                <NavLink to="/" onClick={this.handleSidebarLinkClick} activeClassName="active"><Book /> My Books <em className="pill">{this.props.books.userItems.length}</em></NavLink>
+                <NavLink 
+                  exact={true}
+                  to="/" onClick={this.handleSidebarLinkClick} 
+                  activeClassName="active">
+                  <Book /> My Books <em className="pill">{this.props.books.userItems.length}</em>
+                </NavLink>
               </li>
             </ul>
             {this.renderCategories()}

@@ -19,6 +19,21 @@ class BookSaved extends Component {
     this.props.history.push(`/details/${itemId}`);
   }
 
+  componentDidMount(){
+    this.applyCategory();
+  }
+
+  componentWillReceiveProps(nextProps){
+    if(nextProps.match.params.category !== this.props.match.params.category){
+      this.applyCategory(nextProps.match.params.category);
+    }
+  }
+
+  applyCategory(category = null){
+    category = category || this.props.match.params.category;
+    this.props.books.setCurrentCategory(category);
+  }
+
   renderSubHeading(){
     let subheadingText = '';
     let subheading = null;
