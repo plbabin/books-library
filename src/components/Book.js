@@ -11,10 +11,10 @@ class Book extends Component {
     handleClick = (e) => {
         e.stopPropagation();
         e.preventDefault();
-        if(this.props.addedToList){
-            this.props.books.removeItem(this.props.id);
+        if(this.props.saved){
+            this.props.onRemoveItem(this.props.id);
         }else{
-            this.props.books.addItem(this.props.id);
+            this.props.onAddItem(this.props.id);
         }
     }
 
@@ -27,7 +27,7 @@ class Book extends Component {
     }
 
     render() {
-        const buttonLabel = this.props.addedToList ? 'remove' : 'add';
+        const buttonLabel = this.props.saved ? 'remove' : 'add';
         const linkableClass = this.props.linkable ? 'linkable' : '';
         return (
             <div className="hs-book">

@@ -1,11 +1,14 @@
-import {observable, action, runInAction} from "mobx";
+import {observable, action, runInAction, computed} from "mobx";
+
+const UNCATEGORIZED = 'Uncategorized';
 
 class Books {
     @observable searchTerm = '';
 	@observable isLoading = false;
-    @observable items = [];
+    @observable userItems = [];
     @observable ids = [];
     @observable searchResults = [];
+    @observable currentCategory;
 
     async getRequest(url){
         let data = await (await (fetch(url)
@@ -19,6 +22,29 @@ class Books {
         return data
     }
 
+    @computed get categories(){
+        const categories = [];
+        this.userItems.forEach( (i) => {
+            let itemCategory = UNCATEGORIZED;
+            if(i.categories && i.categories.length > 0){
+                itemCategory = i.categories[0];
+            }
+            
+            if(!categories.includes(itemCategory)){
+                categories.push(itemCategory);
+            }
+        });
+        return categories.sort();
+    }
+
+    @computed get userItemIds(){
+        return this.userItems.map( (i) => i.id );
+    }
+
+    @computed get activeItems(){
+        return this.userItems;
+    }
+
     @action async search(term){
         if(!term){
             this.clearSearch();
@@ -30,7 +56,10 @@ class Books {
         const items = await this.getRequest(`/books?q=${term}`);
 
         runInAction( () => {
-            this.searchResults = items;
+            this.searchResults = items.map( (i) => {
+                i.saved = this.userItemIds.includes(i.id);
+                return i;
+            });
             this.isLoading = false;
         });
     }
@@ -42,11 +71,23 @@ class Books {
     }
 
     @action addItem(itemId){
-        console.log('ADD ITEM', itemId);
+        const item = this.searchResults.find( (el) => el.id === itemId);
+
+        if(item){
+            item.saved = true;
+            this.userItems.push(item);
+        }
     }
 
-    @action removeItems(itemId){
-        console.log('REMOVE ITEM', itemId);
+    @action removeItem(itemId){
+        const item = this.userItems.find( (el) => el.id === itemId);
+        const searchItem = this.searchResults.find( (el) => el.id === itemId);
+        
+        if(searchItem){
+            searchItem.saved = false;
+        }
+
+        this.userItems.remove(item);
     }
 
 

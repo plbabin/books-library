@@ -26,13 +26,8 @@ class Sidebar extends Component {
     })
   }
 
-  handleHomeClick = () => {
-    this.props.history.push('/');
+  handleSidebarLinkClick = () => {
     this.setState({inputValue: ''})
-  }
-
-  handleFocus = () => {
-    this.props.history.push('/search');
   }
 
   componentDidMount(){
@@ -49,19 +44,38 @@ class Sidebar extends Component {
     this.setState({inputValue: e.target.value})
   }
 
+  renderCategories(){
+    if(this.props.books.categories.length === 0){
+      return null;
+    }
+    const categories = this.props.books.categories.map( (cat) => {
+      return (
+        <li key={cat}>
+          <Link to={`/category/${cat}`} onClick={this.handleSidebarLinkClick}>{cat}</Link>
+        </li>
+      );
+    });
+
+    return (
+      <ul className="hs-sidebar__section">
+        {categories}
+      </ul>
+    );
+  }
+
   render() {
     return (
         <div className="hs-sidebar">
             <div className="search-field">
-              <input type="text" onFocus={this.handleFocus} onChange={this.onChange} value={this.state.inputValue} placeholder="Search book to add" />
+              <input type="text" onChange={this.onChange} value={this.state.inputValue} placeholder="Search book to add" />
             </div>
 
             <ul className="hs-sidebar__section">
               <li>
-                <a onClick={this.handleHomeClick}>My Books</a>
+                <Link to="/" onClick={this.handleSidebarLinkClick}>My Books</Link>
               </li>
             </ul>
-            
+            {this.renderCategories()}
         </div>
     );
   }

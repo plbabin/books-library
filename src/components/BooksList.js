@@ -22,8 +22,10 @@ class BooksList extends Component {
                         title={item.title}
                         author={author}
                         image={item.thumbnail}
-                        addedToList={false}
+                        saved={item.saved}
                         linkable={this.props.linkable}
+                        onAddItem={this.props.onAddItem}
+                        onRemoveItem={this.props.onRemoveItem}
                         />
             );
         });

@@ -6,8 +6,8 @@ import { withRouter } from 'react-router-dom';
 
 import BooksList from 'components/BooksList';
 
-@withRouter
 @inject("books")
+@withRouter
 @observer
 class BookSearchResults extends Component {
 
@@ -19,6 +19,14 @@ class BookSearchResults extends Component {
     //this.props.books.clearSearch();
   }
 
+  onAddItem = (itemId) => {
+    this.props.books.addItem(itemId);
+  }
+
+  onRemoveItem = (itemId) => {
+    this.props.books.removeItem(itemId);
+  }
+
   render() {
     let searchTermResults = null;
     if(!this.props.books.isLoading && this.props.books.searchTerm){
@@ -27,8 +35,18 @@ class BookSearchResults extends Component {
     return (
         <div className="hs-booklist">
             <h1>Search Results {searchTermResults}</h1>
-            {this.props.books.isLoading && <p>Is loading</p>}
-            {!this.props.books.isLoading && <BooksList itemList={this.props.books.searchResults} linkable={false} />}
+
+            {this.props.books.isLoading && 
+              <p>Is loading</p>
+            }
+
+            {!this.props.books.isLoading && 
+              <BooksList 
+                itemList={this.props.books.searchResults} 
+                linkable={false} 
+                onAddItem={this.onAddItem}
+                onRemoveItem={this.onRemoveItem} />
+            }
         </div>
     );
   }
