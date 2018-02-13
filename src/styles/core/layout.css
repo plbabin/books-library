@@ -1,0 +1,22 @@
+:root{
+    --sidebar-width:250px;
+}
+.app{
+    display:flex;
+    width:100%;
+    min-height:100%;
+}
+.hs-page-container{
+    padding-left:var(--sidebar-width);
+    width:100%;
+}
+.hs-sidebar{
+    width:var(--sidebar-width);
+    position:fixed;
+    bottom:0;
+    top:0;
+    left:0;
+}
+
+
+
