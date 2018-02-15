@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import {observer, inject} from 'mobx-react';
-import { Route, withRouter } from 'react-router-dom';
+import { Route, withRouter, Switch } from 'react-router-dom';
 
 import Sidebar from 'containers/Sidebar';
 import BookDetails from 'containers/BookDetails';
@@ -19,10 +19,12 @@ class App extends Component {
         <Sidebar />
         <main className="hs-page">
           <div className="hs-container">
-            <Route exact path='/' component={BookSaved}/>
-            <Route path='/category/:category' component={BookSaved}/>
-            <Route path='/search/:term?' component={BookSearchResults}/>
-            <Route path='/details/:id' component={BookDetails}/>
+            <Switch>
+              <Route path='/category/:category' component={BookSaved}/>
+              <Route path='/search/:term' component={BookSearchResults}/>
+              <Route path='/details/:id' component={BookDetails}/>
+              <Route exact path='/' component={BookSaved}/>
+            </Switch>
           </div>  
         </main>
       </div>

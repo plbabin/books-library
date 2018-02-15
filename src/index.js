@@ -7,7 +7,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import {useStrict} from 'mobx';
 import {Provider} from "mobx-react";
 
-import stores from './stores';
+import stores from 'stores/';
 
 import App from 'containers/App';
 

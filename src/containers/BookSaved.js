@@ -23,7 +23,7 @@ class BookSaved extends Component {
   }
 
   componentDidMount(){
-    this.applyCategory();
+    this.applyCategory(this.props.match.params.category);
   }
 
   componentWillReceiveProps(nextProps){
@@ -33,7 +33,6 @@ class BookSaved extends Component {
   }
 
   applyCategory(category = null){
-    category = category || this.props.match.params.category;
     this.props.books.setCurrentCategory(category);
   }
 

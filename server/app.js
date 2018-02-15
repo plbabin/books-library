@@ -42,7 +42,11 @@ router.route('/books')
   .get( (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     const term = req.query.q.replace(/\s/g, "+");
-    const searchString = `intitle:"${term}"`;
+    let searchString = term;
+    if(term.indexOf('inauthor') === -1){
+      searchString = `intitle:"${term}"`;
+    }
+    
     books.search(searchString, searchOptions, (error, results) => {
       if ( ! error ) {
         res.json(results);

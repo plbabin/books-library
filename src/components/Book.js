@@ -41,19 +41,20 @@ class Book extends Component {
     }
 
     render() {
-        const linkableClass = this.props.linkable ? 'linkable' : '';
+        const {title, image, author, linkable} = this.props;
+        const linkableClass = linkable ? 'linkable' : '';
         return (
             <div className="hs-book">
-                <div className="cover">
+                <div className="hs-book-cover">
                     {this.renderActionButton()}
                     
                     <a onClick={this.handleCoverClick} className={linkableClass}>
-                        <img src={this.props.image} alt=""/>
-                        {this.props.linkable && <span className="cover-hover">{<Search size={40} />}</span>}
+                        <img src={image} alt={title}/>
+                        {linkable && <span className="cover-hover">{<Search size={40} />}</span>}
                     </a>
                 </div>
-                <h1>{this.props.title}</h1>
-                <h2>{this.props.author}</h2>
+                <h1>{title}</h1>
+                <h2>{author}</h2>
             </div>
         );
     }

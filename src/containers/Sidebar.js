@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-import {observable, when} from 'mobx';
+import {observable, when, runInAction} from 'mobx';
 import {observer, inject} from 'mobx-react';
 
-import { withRouter, Link, NavLink } from 'react-router-dom';
+import { withRouter, NavLink } from 'react-router-dom';
 
 import Book from 'react-icons/lib/fa/book';
 import Bookmark from 'react-icons/lib/fa/bookmark';
@@ -23,35 +23,58 @@ class Sidebar extends Component {
     super(props);
 
     this.doSearch = debounce(300, this.doSearch);
-    this.state = {inputValue:''}
+    this.updateSearchFieldValue('');
 
     this.handleSearchTerm = when( () => {
       return this.props.books.searchTerm.length > 0
     }, () => {
-      this.setState({inputValue: this.props.books.searchTerm});
+      this.updateSearchFieldValue(this.props.books.searchTerm);
     })
   }
 
   handleSidebarLinkClick = () => {
-    this.setState({inputValue: ''})
+    this.updateSearchFieldValue('');
+  }
+
+  handleBlur = (e) => {
+    if(e.target.value === ''){
+      this.props.history.replace(`/`)
+    }
   }
 
   componentDidMount(){
-    this.setState({inputValue: this.props.books.searchTerm})
+    this.updateSearchFieldValue(this.props.books.searchTerm);
+  }
+
+  componentWillReceiveProps(nextProps){
+    if(nextProps.location.pathname.indexOf('/search') > -1){
+      this.updateSearchFieldValue(this.props.books.searchTerm);
+    }else{
+      this.updateSearchFieldValue('');
+    }
   }
 
   doSearch = (searchTerm) => {
-    this.props.history.replace(`/search/${searchTerm}`)
     this.props.books.search(searchTerm);
+    this.props.history.replace(`/search/${searchTerm}`)
+  }
+
+  updateSearchFieldValue(value){
+    runInAction( () => {
+      this.inputValue = value;
+      if(value === ''){
+        this.props.books.clearSearch();  
+      }
+    })
   }
 
   onChange = (e) => {
     this.doSearch(e.target.value);
-    this.setState({inputValue: e.target.value})
+    this.updateSearchFieldValue(e.target.value);
   }
 
   clearSearch = () => { 
-    this.setState({inputValue: ''}); 
+    this.updateSearchFieldValue('');
     this.props.history.push(`/`)
   }
 
@@ -86,8 +109,12 @@ class Sidebar extends Component {
         <div className="hs-sidebar">
             <div className="search-field">
               <span className="icon"><Search /></span>
-              <input type="text" onChange={this.onChange} value={this.state.inputValue} placeholder="Search by title..." />
-              {this.state.inputValue.length > 0 && <span className="icon"><TimesCircle onClick={ this.clearSearch } /></span>}
+              <input type="text"
+                     onBlur={this.handleBlur} 
+                     onChange={this.onChange} 
+                     value={this.inputValue} 
+                     placeholder="Search by title..." />
+              {this.inputValue.length > 0 && <span className="icon"><TimesCircle onClick={ this.clearSearch } /></span>}
             </div>
 
             <ul className="hs-sidebar__section">

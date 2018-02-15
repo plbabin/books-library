@@ -20,3 +20,13 @@ Object.assign = require('object-assign');
 if (process.env.NODE_ENV === 'test') {
   require('raf').polyfill(global);
 }
+
+if(typeof window.localStorage === 'undefined'){
+  const localStorageMock = {
+    getItem: jest.fn(),
+    setItem: jest.fn(),
+    clear: jest.fn()
+  };
+  global.localStorage = localStorageMock
+}
+

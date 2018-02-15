@@ -39,6 +39,7 @@
             outline:none;
             width:100%;
             height:20px;
+            font-size:14px;
         }
     }
 
@@ -73,7 +74,7 @@
         border-radius:18px;
     }
 
-    .hs-sidebar__section{
+    &__section{
         margin:20px 0 0;
         padding:20px 0 0;
         border-top:1px solid rgba(#fff,0.1);

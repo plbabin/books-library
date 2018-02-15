@@ -17,16 +17,34 @@ class BookDetails extends Component {
     })
   }
 
+  goToAuthor = (author) => {
+    const authorTerm = `inauthor:${author}`;
+    this.props.books.setSearchTerm(authorTerm);
+    this.props.history.push(`/search/${authorTerm}`);
+  }
+
   render() {
     if(!this.currentItem){
       return <p>Book does not exists</p>
     }
+
+    const {title, thumbnail, authors, description, publishedDate} = this.currentItem;
+
     return (
         <div className="hs-bookDetails">
             <Link to="/">back</Link>
             
             <div className="hs-bookDetails__card">
-              <h1>{this.currentItem.title}</h1>
+              <div className="hs-book-cover">
+                <img src={thumbnail} alt=""/>
+              </div>
+              <div className="hs-bookDetails__info">  
+                <h1>{title} <em>{publishedDate}</em>  </h1>
+                <p className="authors">
+                  {authors.map( (author) => (<a key={author} onClick={ ()=> this.goToAuthor(author) }>{author}</a>) )}
+                </p>
+                <p>{description}</p>
+              </div>
             </div>
         </div>
     );

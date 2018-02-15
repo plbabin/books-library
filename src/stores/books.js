@@ -76,6 +76,7 @@ class Books {
     }
 
     @computed get activeItems(){
+        console.log('activeItems');
         let items = toJS(this.userItems);
         if(this.currentCategory){
             items = items.filter( (i) => {
@@ -92,6 +93,9 @@ class Books {
         return items;
     }
     
+    @action setSearchTerm(term){
+        this.searchTerm = term;
+    }
 
     @action async search(term){
         if(!term){
@@ -99,7 +103,7 @@ class Books {
             return;
         }
 
-        this.searchTerm = term;
+        this.setSearchTerm(term);
         this.isLoading = true;
         const items = await this.getRequest(`/books?q=${term}`);
 
@@ -115,7 +119,7 @@ class Books {
     @action clearSearch(){
         this.searchResults = [];
         this.isLoading = false;
-        this.searchTerm = '';
+        this.setSearchTerm('');
     }
 
     @action addItem(itemId){
