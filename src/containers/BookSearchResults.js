@@ -17,10 +17,6 @@ class BookSearchResults extends Component {
     this.props.books.search(this.props.match.params.term);
   }
 
-  componentWillUnmount(){
-    //this.props.books.clearSearch();
-  }
-
   onAddItem = (itemId) => {
     this.props.books.addItem(itemId);
   }
