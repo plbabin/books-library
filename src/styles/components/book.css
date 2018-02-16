@@ -114,6 +114,24 @@
 
 }
 
+.hs-bookSaved{
+    &__header{
+        padding-top:20px;
+        padding-bottom:40px;
+        display:flex;
+        align-items:center;
+
+        h1{
+            margin:0;
+        }
+        
+        select{
+            margin-left:auto;
+            height:20px;
+        }
+    }
+}
+
 .hs-bookDetails{
     a{
         color:#3282b6;

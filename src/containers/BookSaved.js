@@ -3,11 +3,13 @@ import React, { Component } from 'react';
 import {observer, inject} from 'mobx-react';
 
 import { withRouter } from 'react-router-dom';
+import queryString from 'query-string';
 
 import LongArrowLeft from 'react-icons/lib/fa/long-arrow-left';
 
-
 import BooksList from 'components/BooksList'
+
+import {SORT} from 'stores/books';
 
 @inject('books')
 @withRouter
@@ -23,7 +25,12 @@ class BookSaved extends Component {
   }
 
   componentDidMount(){
+    const queryStringParsed = queryString.parse(this.props.location.search);
+
     this.applyCategory(this.props.match.params.category);
+    if(queryStringParsed.sort){
+      this.props.books.setCurrentSort(queryStringParsed.sort);
+    }
   }
 
   componentWillReceiveProps(nextProps){
@@ -34,6 +41,11 @@ class BookSaved extends Component {
 
   applyCategory(category = null){
     this.props.books.setCurrentCategory(category);
+  }
+
+  handleSortChange = (e) => {
+    this.props.books.setCurrentSort(e.target.value);
+    this.props.history.push(`${this.props.location.pathname}?sort=${e.target.value}`);
   }
 
   renderSubHeading(){
@@ -60,10 +72,22 @@ class BookSaved extends Component {
     return null;
   }
 
+  renderSortComponent(){
+    const sortOptions = Object.keys(SORT).map( (s) => (<option key={SORT[s]} value={SORT[s]}>{SORT[s]}</option>))
+    return (
+      <select onChange={this.handleSortChange} value={this.props.books.currentSort}>
+        {sortOptions}
+      </select>
+    );
+  }
+
   render() {
     return (
         <div className="hs-bookSaved">
-            <h1>My Books {this.renderSubHeading()}</h1>
+            <div className="hs-bookSaved__header">
+              <h1>My Books {this.renderSubHeading()}</h1>
+              {this.renderSortComponent()}
+            </div>
             {this.renderEmptyList()}
             <BooksList 
               itemList={this.props.books.activeItems} 

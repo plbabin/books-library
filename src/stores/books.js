@@ -3,6 +3,11 @@ import {observable, action, runInAction, computed, autorun, toJS} from "mobx";
 const UNCATEGORIZED = 'Uncategorized';
 const STORAGE_KEY = 'books';
 
+export const SORT = {
+    'ASC':'Title A-Z',
+    'DESC':'Title Z-A',
+    'CREATED_AT': 'Added to list',
+};
 
 class Books {
     @observable searchTerm = '';
@@ -11,6 +16,7 @@ class Books {
     @observable ids = [];
     @observable searchResults = [];
     @observable currentCategory;
+    @observable currentSort = SORT.ASC;
 
     constructor(){
         this.load();
@@ -76,7 +82,6 @@ class Books {
     }
 
     @computed get activeItems(){
-        console.log('activeItems');
         let items = toJS(this.userItems);
         if(this.currentCategory){
             items = items.filter( (i) => {
@@ -88,9 +93,30 @@ class Books {
             });
         }
 
-        // apply sort here
+        const sortByTitle = (a,b) => {
+            const titleA=a.title.toLowerCase();
+            const titleB=b.title.toLowerCase();
+            if(titleA > titleB){
+                return 1;
+            }else if(titleA < titleB){
+                return -1;
+            }else{
+                return 0;
+            }
+        };
 
-        return items;
+        const sortByCreatedAt = (a,b) => a.createdAt - b.createdAt;
+
+        return items.sort( (a,b) => {
+            switch(this.currentSort){
+                case SORT.DESC:
+                    return sortByTitle(b,a);
+                case SORT.CREATED_AT:
+                    return sortByCreatedAt(a,b);
+                default:
+                    return sortByTitle(a,b);
+            }
+        })
     }
     
     @action setSearchTerm(term){
@@ -127,6 +153,7 @@ class Books {
 
         if(item){
             item.saved = true;
+            item.createdAt = Date.now();
             this.userItems.push(item);
         }
     }
@@ -146,6 +173,13 @@ class Books {
         this.currentCategory = category;
     }
 
+    @action setCurrentSort(sort){
+        this.currentSort = sort;
+    }
+
+    @action resetCurrentSort(){
+        this.currentSort = SORT.ASC;
+    }
 
 }
 

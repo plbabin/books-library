@@ -34,6 +34,7 @@ class Sidebar extends Component {
 
   handleSidebarLinkClick = () => {
     this.updateSearchFieldValue('');
+    this.props.books.resetCurrentSort();
   }
 
   handleBlur = (e) => {
