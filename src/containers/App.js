@@ -6,7 +6,7 @@ import { Route, withRouter, Switch } from 'react-router-dom';
 import Sidebar from 'containers/Sidebar';
 import BookDetails from 'containers/BookDetails';
 import BookSearchResults from 'containers/BookSearchResults';
-import BookSaved from 'containers/BookSaved';
+import BookLibrary from 'containers/BookLibrary';
 
 @inject('books')
 @withRouter
@@ -20,10 +20,10 @@ class App extends Component {
         <main className="hs-page">
           <div className="hs-container">
             <Switch>
-              <Route path='/category/:category' component={BookSaved}/>
+              <Route path='/category/:category' component={BookLibrary}/>
               <Route path='/search/:term' component={BookSearchResults}/>
               <Route path='/details/:id' component={BookDetails}/>
-              <Route exact path='/' component={BookSaved}/>
+              <Route exact path='/' component={BookLibrary}/>
             </Switch>
           </div>  
         </main>

@@ -23,12 +23,23 @@ class BookDetails extends Component {
     this.props.history.push(`/search/${authorTerm}`);
   }
 
+  renderAuthors(){
+    const {authors} = this.currentItem;
+    if(!authors){
+      return null;
+    }
+    
+    return (<p className="authors">
+      {authors.map( (author) => (<a key={author} onClick={ ()=> this.goToAuthor(author) }>{author}</a>) )}
+    </p>);
+  }
+
   render() {
     if(!this.currentItem){
       return <p>Book does not exists</p>
     }
 
-    const {title, thumbnail, authors, description, publishedDate} = this.currentItem;
+    const {title, thumbnail, description, publishedDate} = this.currentItem;
 
     return (
         <div className="hs-bookDetails">
@@ -40,9 +51,7 @@ class BookDetails extends Component {
               </div>
               <div className="hs-bookDetails__info">  
                 <h1>{title} <em>{publishedDate}</em>  </h1>
-                <p className="authors">
-                  {authors.map( (author) => (<a key={author} onClick={ ()=> this.goToAuthor(author) }>{author}</a>) )}
-                </p>
+                {this.renderAuthors()}
                 <p>{description}</p>
               </div>
             </div>

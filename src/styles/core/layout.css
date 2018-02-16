@@ -25,5 +25,18 @@
     left:0;
 }
 
+@media (max-width: 550px) {
+    .app{
+        flex-direction:column;
+    }
+    .hs-sidebar{
+        position:static;
+        width:100%;
+    }
+    .hs-page{
+        padding:0;
+    }
+}
+
 
 

@@ -14,7 +14,7 @@ import {SORT} from 'stores/books';
 @inject('books')
 @withRouter
 @observer
-class BookSaved extends Component {
+class BookLibrary extends Component {
 
   onRemoveItem = (itemId) => {
     this.props.books.removeItem(itemId);
@@ -75,16 +75,20 @@ class BookSaved extends Component {
   renderSortComponent(){
     const sortOptions = Object.keys(SORT).map( (s) => (<option key={SORT[s]} value={SORT[s]}>{SORT[s]}</option>))
     return (
-      <select onChange={this.handleSortChange} value={this.props.books.currentSort}>
-        {sortOptions}
-      </select>
+      <label className="hs-bookLibrary__sort">
+        Sort By: 
+
+        <select onChange={this.handleSortChange} value={this.props.books.currentSort}>
+          {sortOptions}
+        </select>
+      </label>
     );
   }
 
   render() {
     return (
-        <div className="hs-bookSaved">
-            <div className="hs-bookSaved__header">
+        <div className="hs-bookLibrary">
+            <div className="hs-bookLibrary__header">
               <h1>My Books {this.renderSubHeading()}</h1>
               {this.renderSortComponent()}
             </div>
@@ -99,4 +103,4 @@ class BookSaved extends Component {
   }
 }
 
-export default BookSaved;
+export default BookLibrary;

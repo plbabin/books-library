@@ -105,8 +105,8 @@ class Books {
             }
         };
 
-        const sortByCreatedAt = (a,b) => a.createdAt - b.createdAt;
-
+        const sortByCreatedAt = (a,b) => b.createdAt - a.createdAt;
+        console.log(items);
         return items.sort( (a,b) => {
             switch(this.currentSort){
                 case SORT.DESC:
@@ -116,7 +116,7 @@ class Books {
                 default:
                     return sortByTitle(a,b);
             }
-        })
+        });
     }
     
     @action setSearchTerm(term){

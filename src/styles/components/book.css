@@ -125,9 +125,14 @@
             margin:0;
         }
         
+    }
+    &__sort{
+        margin-left:auto;
+        height:20px;
+        font-size:14px;
+
         select{
-            margin-left:auto;
-            height:20px;
+            margin-left:10px;
         }
     }
 }
@@ -166,6 +171,17 @@
             &:after{
                 content:',';
             }
+        }
+    }
+}
+
+
+@media (max-width: 550px) {
+    .hs-booksList{
+        justify-content: center;
+        
+        .hs-book{
+            padding-right:0;
         }
     }
 }
