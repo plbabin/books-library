@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import {observer} from 'mobx-react';
 
@@ -63,5 +64,17 @@ class Book extends Component {
         );
     }
 }
+
+Book.propTypes = {
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+    linkable: PropTypes.bool,
+    image: PropTypes.string.isRequired,
+    saved: PropTypes.bool,
+    onAddItem: PropTypes.func,
+    onRemoveItem: PropTypes.func.isRequired,
+    onCoverClick: PropTypes.func,
+};
 
 export default Book;

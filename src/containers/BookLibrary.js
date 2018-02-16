@@ -39,7 +39,7 @@ class BookLibrary extends Component {
     }
   }
 
-  applyCategory(category = null){
+  applyCategory(category){
     this.props.books.setCurrentCategory(category);
   }
 
@@ -50,7 +50,6 @@ class BookLibrary extends Component {
 
   renderSubHeading(){
     let subheadingText = '';
-    let subheading = null;
 
     if(this.props.match.params.category){
       subheadingText = this.props.match.params.category;
@@ -58,6 +57,8 @@ class BookLibrary extends Component {
     if(this.props.books.activeItems.length > 0){
       subheadingText = `${subheadingText} (${this.props.books.activeItems.length})`;
     }
+
+    let subheading = null;
     if(subheadingText){
       subheading = (<em>{subheadingText}</em>);
     }

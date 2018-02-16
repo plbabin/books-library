@@ -55,7 +55,7 @@ class Books {
     load(){
         const data = localStorage.getItem(STORAGE_KEY);
         if(data){
-            const items = JSON.parse();
+            const items = JSON.parse(data);
 
             if(items){
                 runInAction( () => {

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import {observer} from 'mobx-react';
 
@@ -39,5 +40,14 @@ class BooksList extends Component {
         );
     }
 }
+
+
+BooksList.propTypes = {
+    itemList: PropTypes.array.isRequired,
+    onAddItem: PropTypes.func,
+    onRemoveItem: PropTypes.func.isRequired,
+    onCoverClick: PropTypes.func,
+    linkable: PropTypes.bool.isRequired,
+};
 
 export default BooksList;

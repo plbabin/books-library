@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { withRouter, Link } from 'react-router-dom';
 
-import {observable, runInAction, toJS} from 'mobx';
+import {observable, runInAction} from 'mobx';
 import {observer, inject} from 'mobx-react';
 
 @inject('books')
@@ -13,7 +13,7 @@ class BookDetails extends Component {
 
   componentWillMount(){
     runInAction( () => {
-      this.currentItem = toJS(this.props.books.findById(this.props.match.params.id));
+      this.currentItem = this.props.books.findById(this.props.match.params.id);
     })
   }
 

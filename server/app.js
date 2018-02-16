@@ -1,18 +1,12 @@
 const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
-const bodyParser = require('body-parser');
 
 const books = require('google-books-search');
 const app = express();
 
 // Setup logger
 app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'));
-
-// configure app to use bodyParser()
-// this will let us get the data from a POST
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
 
 // Express only serves static assets in production
 if (process.env.NODE_ENV === 'production') {
