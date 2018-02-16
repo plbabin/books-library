@@ -1,7 +1,7 @@
 import {observable, action, runInAction, computed, autorun, toJS} from "mobx";
 
-const UNCATEGORIZED = 'Uncategorized';
 const STORAGE_KEY = 'books';
+export const UNCATEGORIZED = 'Uncategorized';
 
 export const SORT = {
     'ASC':'Title A-Z',
@@ -53,11 +53,15 @@ class Books {
     }
 
     load(){
-        const items = JSON.parse(localStorage.getItem(STORAGE_KEY));
-        if(items){
-            runInAction( () => {
-                this.userItems = items;
-            });
+        const data = localStorage.getItem(STORAGE_KEY);
+        if(data){
+            const items = JSON.parse();
+
+            if(items){
+                runInAction( () => {
+                    this.userItems = items;
+                });
+            }
         }
     }
 
@@ -106,7 +110,6 @@ class Books {
         };
 
         const sortByCreatedAt = (a,b) => b.createdAt - a.createdAt;
-        console.log(items);
         return items.sort( (a,b) => {
             switch(this.currentSort){
                 case SORT.DESC:

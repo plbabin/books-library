@@ -10,8 +10,10 @@ import Search from 'react-icons/lib/fa/search';
 class Book extends Component {
     
     handleClick = (e) => {
-        e.stopPropagation();
-        e.preventDefault();
+        if(e){
+            e.stopPropagation();
+            e.preventDefault();
+        }
         if(this.props.saved){
             this.props.onRemoveItem(this.props.id);
         }else{
@@ -20,7 +22,9 @@ class Book extends Component {
     }
 
     handleCoverClick = (e) => {
-        e.preventDefault();
+        if(e){
+            e.preventDefault();
+        }
         if(!this.props.linkable){
             return false;
         }
@@ -35,7 +39,7 @@ class Book extends Component {
             buttonLabel = 'remove';
         }
         return (
-            <button className="btn" onClick={this.handleClick}>
+            <button className="btn hs-book-action" onClick={this.handleClick}>
                 {icon} <span>{buttonLabel}</span>
             </button>);
     }
