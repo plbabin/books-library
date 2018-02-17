@@ -34,7 +34,7 @@ class BooksList extends Component {
             return (<Book key={item.id} {...props} />);
         });
         return (
-            <div className="hs-booksList">
+            <div className="bl-booksList">
                 {itemList}
             </div>
         );

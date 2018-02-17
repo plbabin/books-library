@@ -17,8 +17,8 @@ class App extends Component {
     return (
       <div className="app">
         <Sidebar />
-        <main className="hs-page">
-          <div className="hs-container">
+        <main className="bl-page">
+          <div className="bl-container">
             <Switch>
               <Route path='/category/:category' component={BookLibrary}/>
               <Route path='/search/:term' component={BookSearchResults}/>

@@ -40,7 +40,7 @@ class Book extends Component {
             buttonLabel = 'remove';
         }
         return (
-            <button className="btn hs-book-action" onClick={this.handleClick}>
+            <button className="btn bl-book-action" onClick={this.handleClick}>
                 {icon} <span>{buttonLabel}</span>
             </button>);
     }
@@ -49,8 +49,8 @@ class Book extends Component {
         const {title, image, author, linkable} = this.props;
         const linkableClass = linkable ? 'linkable' : '';
         return (
-            <div className="hs-book">
-                <div className="hs-book-cover">
+            <div className="bl-book">
+                <div className="bl-book-cover">
                     {this.renderActionButton()}
                     
                     <a onClick={this.handleCoverClick} className={linkableClass}>

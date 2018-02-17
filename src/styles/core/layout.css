@@ -6,18 +6,18 @@
     width:100%;
     min-height:100%;
 }
-.hs-page{
+.bl-page{
     padding-left:var(--sidebar-width);
     width:100%;
     min-height: 100vh;
 }
 
-.hs-container{
+.bl-container{
     padding:25px;
     height:100%;
 }
 
-.hs-sidebar{
+.bl-sidebar{
     width:var(--sidebar-width);
     position:fixed;
     bottom:0;
@@ -29,11 +29,11 @@
     .app{
         flex-direction:column;
     }
-    .hs-sidebar{
+    .bl-sidebar{
         position:static;
         width:100%;
     }
-    .hs-page{
+    .bl-page{
         padding:0;
     }
 }

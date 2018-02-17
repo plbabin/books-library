@@ -1,5 +1,5 @@
 {
-  "name": "hs-books",
+  "name": "books-library",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

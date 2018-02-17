@@ -42,14 +42,14 @@ class BookDetails extends Component {
     const {title, thumbnail, description, publishedDate} = this.currentItem;
 
     return (
-        <div className="hs-bookDetails">
+        <div className="bl-bookDetails">
             <Link to="/">back</Link>
             
-            <div className="hs-bookDetails__card">
-              <div className="hs-book-cover">
+            <div className="bl-bookDetails__card">
+              <div className="bl-book-cover">
                 <img src={thumbnail} alt=""/>
               </div>
-              <div className="hs-bookDetails__info">  
+              <div className="bl-bookDetails__info">  
                 <h1>{title} <em>{publishedDate}</em>  </h1>
                 {this.renderAuthors()}
                 <p>{description}</p>

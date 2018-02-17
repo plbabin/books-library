@@ -31,7 +31,7 @@ class BookSearchResults extends Component {
       searchTermResults = (<em>{this.props.books.searchTerm} ({this.props.books.searchResults.length})</em>);
     }
     return (
-        <div className="hs-booksList">
+        <div className="bl-booksList">
             <h1>Search Results {searchTermResults}</h1>
 
             {this.props.books.isLoading && 

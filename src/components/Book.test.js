@@ -25,9 +25,15 @@ afterEach(() => {
 describe("Book.functional", () => {
 
   it("add book to list", () => {
-    const wrapper = shallow(<Book id={BOOK_ITEM.id} title={BOOK_ITEM.title} onAddItem={ (itemId) => { stores.books.addItem(itemId) } } />)
+    const wrapper = shallow(<Book id={BOOK_ITEM.id} 
+                                  author={BOOK_ITEM.authors[0]} 
+                                  title={BOOK_ITEM.title} 
+                                  image={BOOK_ITEM.thumbnail}
+                                  onAddItem={ (itemId) => { stores.books.addItem(itemId) } }
+                                  onRemoveItem={jest.fn} 
+                                  />)
 
-    wrapper.find(".hs-book-action").simulate("click");
+    wrapper.find(".bl-book-action").simulate("click");
     expect(stores.books.userItems.length).toBe(1);
   })
 })

@@ -76,7 +76,7 @@ class BookLibrary extends Component {
   renderSortComponent(){
     const sortOptions = Object.keys(SORT).map( (s) => (<option key={SORT[s]} value={SORT[s]}>{SORT[s]}</option>))
     return (
-      <label className="hs-bookLibrary__sort">
+      <label className="bl-bookLibrary__sort">
         Sort By: 
 
         <select onChange={this.handleSortChange} value={this.props.books.currentSort}>
@@ -88,8 +88,8 @@ class BookLibrary extends Component {
 
   render() {
     return (
-        <div className="hs-bookLibrary">
-            <div className="hs-bookLibrary__header">
+        <div className="bl-bookLibrary">
+            <div className="bl-bookLibrary__header">
               <h1>My Books {this.renderSubHeading()}</h1>
               {this.renderSortComponent()}
             </div>

@@ -99,7 +99,7 @@ class Sidebar extends Component {
     });
 
     return (
-      <ul className="hs-sidebar__section">
+      <ul className="bl-sidebar__section">
         {categories}
       </ul>
     );
@@ -107,7 +107,7 @@ class Sidebar extends Component {
 
   render() {
     return (
-        <div className="hs-sidebar">
+        <div className="bl-sidebar">
             <div className="search-field">
               <span className="icon"><Search /></span>
               <input type="text"
@@ -118,7 +118,7 @@ class Sidebar extends Component {
               {this.inputValue.length > 0 && <span className="icon"><TimesCircle onClick={ this.clearSearch } /></span>}
             </div>
 
-            <ul className="hs-sidebar__section">
+            <ul className="bl-sidebar__section">
               <li>
                 <NavLink 
                   exact={true}
