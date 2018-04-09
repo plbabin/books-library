@@ -4,24 +4,11 @@
   "private": true,
   "dependencies": {
     "autoprefixer": "7.1.6",
-    "babel-core": "6.26.0",
-    "babel-eslint": "7.2.3",
-    "babel-jest": "20.0.3",
-    "babel-loader": "7.1.2",
-    "babel-preset-react-app": "^3.1.1",
-    "babel-runtime": "6.26.0",
     "case-sensitive-paths-webpack-plugin": "2.1.1",
     "chalk": "1.1.3",
     "css-loader": "0.28.7",
     "dotenv": "4.0.0",
     "dotenv-expand": "4.2.0",
-    "eslint": "4.10.0",
-    "eslint-config-react-app": "^2.1.0",
-    "eslint-loader": "1.9.0",
-    "eslint-plugin-flowtype": "2.39.1",
-    "eslint-plugin-import": "2.8.0",
-    "eslint-plugin-jsx-a11y": "5.1.1",
-    "eslint-plugin-react": "7.4.0",
     "express": "^4.16.2",
     "extract-text-webpack-plugin": "3.0.2",
     "file-loader": "1.1.5",
@@ -77,15 +64,14 @@
       "jest-localstorage-mock"
     ],
     "testMatch": [
-      "<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}",
-      "<rootDir>/src/**/?(*.)(spec|test).{js,jsx,mjs}"
+      "<rootDir>/src/**/__tests__/**/*.{ts|tsx|js,jsx,mjs}",
+      "<rootDir>/src/**/?(*.)(spec|test).{ts|tsx|js,jsx,mjs}"
     ],
     "testEnvironment": "node",
     "testURL": "http://localhost",
     "transform": {
-      "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest",
       "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-      "^(?!.*\\.(js|jsx|mjs|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+      "^(?!.*\\.(ts|tsx|js|jsx|mjs|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
     },
     "transformIgnorePatterns": [
       "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"
@@ -94,6 +80,8 @@
       "^react-native$": "react-native-web"
     },
     "moduleFileExtensions": [
+      "ts", 
+      "tsx",
       "web.js",
       "mjs",
       "js",
@@ -104,22 +92,17 @@
     ],
     "setupTestFrameworkScriptFile": "<rootDir>/src/setupTests.js"
   },
-  "babel": {
-    "plugins": [
-      "transform-decorators-legacy"
-    ],
-    "presets": [
-      "react-app"
-    ]
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "devDependencies": {
-    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "@types/jest": "^22.2.2",
+    "@types/react": "^16.3.5",
+    "@types/react-dom": "^16.0.4",
+    "@types/react-router": "^4.0.23",
+    "awesome-typescript-loader": "^4.0.0",
     "concurrently": "^3.5.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "jest-localstorage-mock": "^2.2.0"
+    "jest-localstorage-mock": "^2.2.0",
+    "source-map-loader": "^0.2.3",
+    "typescript": "^2.8.1"
   }
 }
