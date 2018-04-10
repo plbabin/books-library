@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 
 import {observer, inject} from 'mobx-react';
 
@@ -11,7 +11,7 @@ import BooksList from 'components/BooksList';
 @inject("books")
 @withRouter
 @observer
-class BookSearchResults extends Component {
+class BookSearchResults extends React.Component<any, any> {
 
   componentDidMount(){
     this.props.books.search(this.props.match.params.term);

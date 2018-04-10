@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 
 import {observer, inject} from 'mobx-react';
 import { Route, withRouter, Switch } from 'react-router-dom';
@@ -11,7 +11,7 @@ import BookLibrary from 'containers/BookLibrary';
 @inject('books')
 @withRouter
 @observer
-class App extends Component {
+class App extends React.Component {
 
   render() {
     return (

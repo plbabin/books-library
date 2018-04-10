@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 
 import {observable, when, runInAction} from 'mobx';
 import {observer, inject} from 'mobx-react';
@@ -16,9 +16,11 @@ import {debounce} from 'throttle-debounce';
 @inject('books')
 @withRouter
 @observer
-class Sidebar extends Component {
+class Sidebar extends React.Component<any, any> {
   @observable inputValue = '';
-  
+
+  handleSearchTerm:any;
+
   constructor(props){
     super(props);
 
@@ -108,27 +110,27 @@ class Sidebar extends Component {
   render() {
     return (
         <div className="bl-sidebar">
-            <div className="search-field">
-              <span className="icon"><Search /></span>
-              <input type="text"
-                     onBlur={this.handleBlur} 
-                     onChange={this.onChange} 
-                     value={this.inputValue} 
-                     placeholder="Search by title..." />
-              {this.inputValue.length > 0 && <span className="icon"><TimesCircle onClick={ this.clearSearch } /></span>}
-            </div>
+          <div className="search-field">
+            <span className="icon"><Search /></span>
+            <input type="text"
+                    onBlur={this.handleBlur} 
+                    onChange={this.onChange} 
+                    value={this.inputValue} 
+                    placeholder="Search by title..." />
+            {this.inputValue.length > 0 && <span className="icon"><TimesCircle onClick={ this.clearSearch } /></span>}
+          </div>
 
-            <ul className="bl-sidebar__section">
-              <li>
-                <NavLink 
-                  exact={true}
-                  to="/" onClick={this.handleSidebarLinkClick} 
-                  activeClassName="active">
-                  <Book /> My Books <em className="pill">{this.props.books.userItems.length}</em>
-                </NavLink>
-              </li>
-            </ul>
-            {this.renderCategories()}
+          <ul className="bl-sidebar__section">
+            <li>
+              <NavLink 
+                exact={true}
+                to="/" onClick={this.handleSidebarLinkClick} 
+                activeClassName="active">
+                <Book /> My Books <em className="pill">{this.props.books.userItems.length}</em>
+              </NavLink>
+            </li>
+          </ul>
+          {this.renderCategories()}
         </div>
     );
   }

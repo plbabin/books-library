@@ -1,8 +1,10 @@
 import { shallow } from 'enzyme'
-import React from "react"
+import * as React from "react"
+import {observable} from 'mobx';
 
 import Book from "./Book"
-import stores from "stores/"
+import stores from "stores"
+
 
 const BOOK_ITEM = {
     id:'46856546568',
@@ -18,7 +20,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-    stores.books.userItems = [];
+    stores.books.userItems = observable.array();
     stores.books.searchResults = [];
 });
 
@@ -30,7 +32,7 @@ describe("Book.functional", () => {
                                   title={BOOK_ITEM.title} 
                                   image={BOOK_ITEM.thumbnail}
                                   onAddItem={ (itemId) => { stores.books.addItem(itemId) } }
-                                  onRemoveItem={jest.fn} 
+                                  onRemoveItem={()=>{}} 
                                   />)
 
     wrapper.find(".bl-book-action").simulate("click");

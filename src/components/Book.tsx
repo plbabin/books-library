@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import * as React from 'react';
+
 import PropTypes from 'prop-types';
 
 import {observer} from 'mobx-react';
@@ -7,8 +8,20 @@ import Plus from 'react-icons/lib/fa/plus';
 import Minus from 'react-icons/lib/fa/minus';
 import Search from 'react-icons/lib/fa/search';
 
+interface IBookProps {
+    id: string;
+    title: string;
+    author: string;
+    linkable?: boolean;
+    image: string;
+    saved?: boolean;
+    onRemoveItem(id?: string);
+    onAddItem?(id: string);
+    onCoverClick?(id: string);
+}
+
 @observer
-class Book extends Component {
+class Book extends React.Component<IBookProps, any> {
     
     handleClick = (e) => {
         if(e){
@@ -64,17 +77,5 @@ class Book extends Component {
         );
     }
 }
-
-Book.propTypes = {
-    id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    author: PropTypes.string.isRequired,
-    linkable: PropTypes.bool,
-    image: PropTypes.string.isRequired,
-    saved: PropTypes.bool,
-    onAddItem: PropTypes.func,
-    onRemoveItem: PropTypes.func.isRequired,
-    onCoverClick: PropTypes.func,
-};
 
 export default Book;

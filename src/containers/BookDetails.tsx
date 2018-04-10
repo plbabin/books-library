@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 
 import { withRouter, Link } from 'react-router-dom';
 
@@ -8,7 +8,7 @@ import {observer, inject} from 'mobx-react';
 @inject('books')
 @withRouter
 @observer
-class BookDetails extends Component {
+class BookDetails extends React.Component<any, any> {
   @observable currentItem = null;
 
   componentWillMount(){

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 
 import {observer, inject} from 'mobx-react';
 
@@ -11,10 +11,11 @@ import BooksList from 'components/BooksList'
 
 import {SORT} from 'stores/books';
 
+
 @inject('books')
 @withRouter
 @observer
-class BookLibrary extends Component {
+class BookLibrary extends React.Component<any, any> {
 
   onRemoveItem = (itemId) => {
     this.props.books.removeItem(itemId);

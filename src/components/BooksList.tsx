@@ -1,12 +1,19 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 
 import {observer} from 'mobx-react';
 
-import Book from 'components/Book';
+import Book from './Book';
+
+interface IBookListProps{
+    itemList: any[];
+    onRemoveItem(item:string);
+    onAddItem?(item:string);
+    onCoverClick?(item:string);
+    linkable: boolean;
+}
 
 @observer
-class BooksList extends Component {
+class BooksList extends React.Component<IBookListProps, any> {
     generateItemProps(item){
         let author = '';
         if(item.authors && item.authors.length > 0){
@@ -40,14 +47,5 @@ class BooksList extends Component {
         );
     }
 }
-
-
-BooksList.propTypes = {
-    itemList: PropTypes.array.isRequired,
-    onAddItem: PropTypes.func,
-    onRemoveItem: PropTypes.func.isRequired,
-    onCoverClick: PropTypes.func,
-    linkable: PropTypes.bool.isRequired,
-};
 
 export default BooksList;
