@@ -9,7 +9,7 @@ import {Provider} from "mobx-react";
 
 import stores from 'stores/';
 
-import App from 'containers/App';
+import Application from 'containers/Application';
 
 import 'styles/app.css';
 
@@ -18,6 +18,6 @@ useStrict(true);
 ReactDOM.render( 
     <Provider {...stores}>
         <Router>
-            <App />
+            <Application />
         </Router>
     </Provider>, document.getElementById('root'));

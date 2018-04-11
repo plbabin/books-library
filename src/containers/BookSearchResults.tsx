@@ -4,7 +4,7 @@ import {observer, inject} from 'mobx-react';
 
 import { withRouter } from 'react-router-dom';
 
-import Spinner from "react-svg-spinner";
+import * as Spinner from "react-svg-spinner";
 
 import BooksList from 'components/BooksList';
 
@@ -17,11 +17,11 @@ class BookSearchResults extends React.Component<any, any> {
     this.props.books.search(this.props.match.params.term);
   }
 
-  onAddItem = (itemId) => {
+  onAddItem = (itemId:string) => {
     this.props.books.addItem(itemId);
   }
 
-  onRemoveItem = (itemId) => {
+  onRemoveItem = (itemId:string) => {
     this.props.books.removeItem(itemId);
   }
 

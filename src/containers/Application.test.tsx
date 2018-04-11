@@ -6,12 +6,14 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { Provider } from 'mobx-react';
 import stores from 'stores/';
 
-import App from './App';
+import Application from './Application';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(<Provider {...stores}>
-    <Router><App /></Router>
+    <Router>
+      <Application />
+    </Router>
   </Provider>, div);
   ReactDOM.unmountComponentAtNode(div);
 });
