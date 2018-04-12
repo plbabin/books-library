@@ -5,9 +5,6 @@ import { withRouter, Link } from 'react-router-dom';
 import {observable, runInAction} from 'mobx';
 import {observer, inject} from 'mobx-react';
 
-@inject('books')
-@withRouter
-@observer
 class BookDetails extends React.Component<any, any> {
   @observable currentItem = null;
 
@@ -60,4 +57,4 @@ class BookDetails extends React.Component<any, any> {
   }
 }
 
-export default BookDetails;
+export default inject('books')(withRouter(observer(BookDetails)));

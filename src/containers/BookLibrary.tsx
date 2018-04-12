@@ -12,9 +12,6 @@ import BooksList from 'components/BooksList'
 import {SORT} from 'stores/books';
 
 
-@inject('books')
-@withRouter
-@observer
 class BookLibrary extends React.Component<any, any> {
 
   onRemoveItem = (itemId) => {
@@ -105,4 +102,4 @@ class BookLibrary extends React.Component<any, any> {
   }
 }
 
-export default BookLibrary;
+export default inject('books')(withRouter(observer(BookLibrary)));

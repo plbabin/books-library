@@ -13,9 +13,6 @@ import TimesCircle from 'react-icons/lib/fa/times-circle';
 
 import {debounce} from 'throttle-debounce';
 
-@inject('books')
-@withRouter
-@observer
 class Sidebar extends React.Component<any, any> {
   @observable inputValue = '';
 
@@ -136,4 +133,4 @@ class Sidebar extends React.Component<any, any> {
   }
 }
 
-export default Sidebar;
+export default inject('books')(withRouter(observer(Sidebar)));

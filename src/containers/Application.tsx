@@ -8,19 +8,7 @@ import BookDetails from 'containers/BookDetails';
 import BookSearchResults from 'containers/BookSearchResults';
 import BookLibrary from 'containers/BookLibrary';
 
-// inform we match url /:id
-interface IMatchParams {
-  id: string;
-}
-
-// Note we use Partial<RouteComponentProps> to make all RouteComponentProps as optional for high order component
-interface IComponentProps extends Partial<RouteComponentProps<IMatchParams>> {
-}
-
-@inject('books')
-@withRouter
-@observer
-class Application extends React.Component<IComponentProps,any> {
+class Application extends React.Component<any,any> {
 
   render() {
     return (
@@ -41,4 +29,4 @@ class Application extends React.Component<IComponentProps,any> {
   }
 }
 
-export default Application;
+export default inject('books')(withRouter(observer(Application)));

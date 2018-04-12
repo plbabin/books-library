@@ -1,16 +1,11 @@
 import * as React from 'react';
-
 import {observer, inject} from 'mobx-react';
-
 import { withRouter } from 'react-router-dom';
-
 import * as Spinner from "react-svg-spinner";
 
 import BooksList from 'components/BooksList';
 
-@inject("books")
-@withRouter
-@observer
+
 class BookSearchResults extends React.Component<any, any> {
 
   componentDidMount(){
@@ -50,4 +45,4 @@ class BookSearchResults extends React.Component<any, any> {
   }
 }
 
-export default BookSearchResults;
+export default inject("books")(withRouter(observer(BookSearchResults)));
